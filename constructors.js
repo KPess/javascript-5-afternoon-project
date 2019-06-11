@@ -68,16 +68,18 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
 
 let move = 0
 
-function Car(make, model, year, move) {
+function Car(make, model, year) {
   this.make = make;
   this.model = model;
   this.year = year
-  this.move = move
+  this.move = 0
+  this.moveCar = function() {
+   this.move+=10
+   return this.move
+  }
 }
 
-Car.prototype.moveCar() {
-  this.moveCar += 10
-}
+
 
 
 
@@ -98,6 +100,11 @@ function Movie(name, genre, rating) {
   this.rating = rating;
 }
 
+Movie.prototype.changeRating = function(newRating) {
+  let oldRating = this.rating 
+  return ((oldRating += newRating)/2)
+}
+  
 // Code here
 
 ////////// PROBLEM 5 //////////
