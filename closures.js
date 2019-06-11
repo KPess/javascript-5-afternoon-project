@@ -24,12 +24,13 @@ function outer() {
   
 // Code Here
 
-
+var inner = outer()
 
 //Once you do that, invoke inner.
 
 //Code Here
 
+inner()
 
 
 ////////// PROBLEM 2 //////////
@@ -53,7 +54,9 @@ function callFriend(name) {
 
 //Code Here
 
+var callJake = callFriend('Jake')
 
+callJake('435-555-9248')
 
 ////////// PROBLEM 3 //////////
 
@@ -62,15 +65,23 @@ function callFriend(name) {
 */
 
 //Code Here
+function makeCounter() {
+  num = 0
+  return function addOne() {
+    num++
+    return num
+  }
+  
+}
 
 
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -87,9 +98,14 @@ function callFriend(name) {
 
 function counterFactory(value) {
   // Code here.
-
+  this.value = value
   return {
-
+    inc: () => {
+      value++ 
+      return value},
+    dec: () => {
+      value--
+      return value}
   };
 }
 
@@ -113,7 +129,9 @@ function motivation( firstname, lastname ) {
   var welcomeText = "You're doing awesome, keep it up";
 
   // code message function here.
-
+  return function message() {
+    return `${welcomeText} ${firstname} ${lastname}.`
+  }
   //Uncommment this to return the value of your message function
   //return message;
 }
@@ -143,6 +161,9 @@ var module = (function() {
   // Anything that is being returned is made public and can be invoked from
   // outside our lexical scope
   return {
+    publicMethod: function() {
+      return privateMethod()
+    }
     // Code here.
   };
 })();
@@ -162,6 +183,15 @@ function secretNumber() {
   var secret = 143;
 
   return {
+    addToSecret: function(addNum) {
+      secret+=addNum
+      return secret
+
+    },
+    takeAwayFromSecret: function(subNum) {
+      secret-=subNum
+      return secret
+    }
     // Code here
   };
 }
@@ -188,9 +218,10 @@ function secretNumber() {
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
+    (index => {
     setTimeout(function() {
-      console.log(i);
-    }, i * 1000);
+      console.log(index);
+    }, index * 1000)})(i)
   }
 }
 timeOutCounter();
